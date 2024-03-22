@@ -1,0 +1,72 @@
+<?php
+include_once 'db.php';
+$result = mysqli_query($conn,"SELECT * FROM members");
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+<title>Delete members data</title>
+</head>
+<style>
+  body {
+  background-image: url("image/bg4.jpg");
+}
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+
+}
+
+tr:nth-child(even) {
+    background-color: white;
+}
+  </style>
+<body>
+<table>
+	<tr>
+	<td>MEMBER ID</td>
+    <td>MEMBER NAME</td>
+    <td>EMAIL ID</td>
+    <td>ADDRESS</td>
+    <td>GENDER</td>
+    <td> DATE OF BIRTH</td>
+    <td>PACKAGE</td>
+	 <td>PACKAGE</td>
+    <td>WEIGHT</td>
+    <td>HEIGHT</td>
+	<td>Action</td>
+	</tr>
+	<?php
+	$i=0;
+	while($row = mysqli_fetch_array($result)) {
+	?>
+	<tr class="<?php if(isset($classname)) echo $classname;?>">
+	<td><?php echo $row["id"]; ?></td>
+    <td><?php echo $row["full_name"]; ?></td>
+    <td><?php echo $row["email"]; ?></td>
+    <td><?php echo $row["phone"]; ?></td>
+    <td><?php echo $row["address"]; ?></td>
+    <td><?php echo $row["gender"]; ?></td>
+    <td><?php echo $row["birth_date"]; ?></td>
+   
+    <td><?php echo $row["package"]; ?></td>
+    <td><?php echo $row["weight"]; ?></td>
+    <td><?php echo $row["height"]; ?></td>
+	<td><a href="delete-process.php?ID=<?php echo $row["id"]; ?>">Delete</a></td>
+	</tr>
+	<?php
+	$i++;
+	}
+	?>
+</table>
+</body>
+</html>
